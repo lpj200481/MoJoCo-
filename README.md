@@ -44,9 +44,6 @@ MuJoCo MPC 汽车仪表盘项目
 - `simulate.h` — simulate.cc 的接口声明 + DashboardData 结构体  
 - `test_simple_car.cc` — 单元测试：离线验证车速、油耗、指针角度计算是否正确  
 
-**scenes/**  
-- `car_simple.xml` — 小车 MJCF 场景：车身、两轮、自由关节、目标点 site  
-
 **images/**  
 - `截图*.png` — 运行截图：仪表盘效果、速度曲线、警告状态  
 
