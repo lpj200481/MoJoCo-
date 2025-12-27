@@ -1,5 +1,9 @@
 MuJoCo MPC 汽车仪表盘项目
 
+- **代码仓库**: https://github.com/lpj200481/MoJoCo-.git
+- **运行视频**: https://b23.tv/gli2Iq3
+- **作业报告**: https://github.com/lpj200481/MoJoCo-/blob/main/report.md
+
 项目信息
 
 学号: 232011081
