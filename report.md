@@ -73,6 +73,11 @@ DrawGauge(speed_dashboard_pos, speed_ratio, speed_ticks,
             static_cast<float>(speed_kmh), "km/h",
             0.0f, 0.0f, 0.0f);
 
+const float max_speed_kmh = 10.0f;
+float speed_ratio = static_cast<float>(speed_kmh) / max_speed_kmh;
+if (speed_ratio > 1.0f) speed_ratio = 1.0f;
+if (speed_ratio < 0.0f) speed_ratio = 0.0f;
+
 3.3.2 转速表
 
 转速表的实现逻辑与速度表类似，但其警告区域（通常为红色）需要在RPM超过阈值（如6000）时被高亮。这可以通过在表盘背景之上，根据当前RPM值动态绘制一个扇形区域来实现。
@@ -82,6 +87,32 @@ DrawGauge(speed_dashboard_pos, speed_ratio, speed_ticks,
 DrawGauge(rpm_dashboard_pos, rpm_ratio, rpm_ticks,
             rpm_value, "RPM",
             0.0f, 1.0f, 0.0f);
+
+const float max_rpm = 8000.0f;
+float rpm_ratio = static_cast<float>(speed_m / max_speed_ref);
+if (rpm_ratio > 1.0f) rpm_ratio = 1.0f;
+if (rpm_ratio < 0.0f) rpm_ratio = 0.0f;
+float rpm_value = rpm_ratio * max_rpm;
+
+ double angle_x = 90.0 * 3.14159 / 180.0;
+  double cos_x = std::cos(angle_x);
+  double sin_x = std::sin(angle_x);
+  double mat_x[9] = {1, 0, 0, 0, cos_x, -sin_x, 0, sin_x, cos_x};
+
+  double angle_z = -90.0 * 3.14159 / 180.0;
+  double cos_z = std::cos(angle_z);
+  double sin_z = std::sin(angle_z);
+  double mat_z[9] = {cos_z, -sin_z, 0, sin_z, cos_z, 0, 0, 0, 1};
+
+  double dashboard_rot_mat[9];
+  for (int i = 0; i < 3; i++) {
+    for (int j = 0; j < 3; j++) {
+      dashboard_rot_mat[i * 3 + j] = 0;
+      for (int k = 0; k < 3; k++) {
+        dashboard_rot_mat[i * 3 + j] += mat_z[i * 3 + k] * mat_x[k * 3 + j];
+      }
+    }
+  }
 
 3.4 进阶功能（如果有）
 
