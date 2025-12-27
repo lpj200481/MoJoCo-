@@ -71,10 +71,12 @@ void getDashboardData(const mjModel* m, const mjData* d, DashboardData* out) {
 
 核心代码
 
+
+  // 左：速度
    DrawGauge(speed_dashboard_pos, speed_ratio, speed_ticks,
             static_cast<float>(speed_kmh), "km/h",
             0.0f, 0.0f, 0.0f);
-
+// ===== 速度盘比例 =====
    const float max_speed_kmh = 10.0f;
    float speed_ratio = static_cast<float>(speed_kmh) / max_speed_kmh;
    if (speed_ratio > 1.0f) speed_ratio = 1.0f;
@@ -88,16 +90,19 @@ void getDashboardData(const mjModel* m, const mjData* d, DashboardData* out) {
 
 核心代码
 
+  // 右：转速
    DrawGauge(rpm_dashboard_pos, rpm_ratio, rpm_ticks,
             rpm_value, "RPM",
             0.0f, 1.0f, 0.0f);
 
+  // ===== 转速盘比例（模拟）=====
    const float max_rpm = 8000.0f;
    float rpm_ratio = static_cast<float>(speed_m / max_speed_ref);
    if (rpm_ratio > 1.0f) rpm_ratio = 1.0f;
    if (rpm_ratio < 0.0f) rpm_ratio = 0.0f;
    float rpm_value = rpm_ratio * max_rpm;
-
+   
+ // ===== 仪表盘旋转（立起来 + 顺时针90度）=====
   double angle_x = 90.0 * 3.14159 / 180.0;
   double cos_x = std::cos(angle_x);
   double sin_x = std::sin(angle_x);
