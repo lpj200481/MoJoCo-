@@ -1,0 +1,9 @@
+MuJoCo MPC (MJPC)
+ MuJoCo version 3.2.3
+ Hardware threads:  8
+  physics        :  1
+  render         :  1
+  Planner        :  1
+    planning     :  5
+  Estimator      :  0
+    estimation   :  0
