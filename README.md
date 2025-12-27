@@ -30,29 +30,32 @@ MuJoCo MPC 汽车仪表盘项目
 
 项目目录
 
-MoJoCo-/                         ← 仓库根
-├── .gitignore
-├── CMakeLists.txt
-├── LICENSE
-├── README.md
-├── report.md
-├── code/
-│   ├── app.cc
-│   ├── app.h
-│   ├── simple_car.cc
-│   ├── simulate.cc
-│   ├── simulate.h
-│   └── test_simple_car.cc
-├── scenes/
-│   └── car_simple.xml
-├── images/
-│   ├── 截图2025-12-27*.png
-│   └── …
-├── videos/
-│   └── *.mp4
-└── logs/
-    ├── compile.log
-    └── debug.log
+- `.gitignore` — 忽略 build/、*.o、VS/QT 缓存等临时文件  
+- `CMakeLists.txt` — 顶层构建脚本，自动拉取 MuJoCo/MJPC/Abseil 并生成可执行文件 mjpc  
+- `LICENSE` — MIT 开源许可证  
+- `README.md` — 项目简介与一键编译/运行指南  
+- `report.md` — 课程大作业报告（设计思路、测试结果、未来工作）  
+
+**code/**  
+- `app.cc` — 主入口：初始化 GLFW 窗口、调度仿真循环、捕获键盘事件  
+- `app.h` — app.cc 的头文件：窗口/渲染上下文声明  
+- `simple_car.cc` — SimpleCar 任务实现：加载 MJCF、残差计算、状态转移、数据接口  
+- `simulate.cc` — 仪表盘数据提取与平滑滤波（供 simple_car.cc 调用）  
+- `simulate.h` — simulate.cc 的接口声明 + DashboardData 结构体  
+- `test_simple_car.cc` — 单元测试：离线验证车速、油耗、指针角度计算是否正确  
+
+**scenes/**  
+- `car_simple.xml` — 小车 MJCF 场景：车身、两轮、自由关节、目标点 site  
+
+**images/**  
+- `截图*.png` — 运行截图：仪表盘效果、速度曲线、警告状态  
+
+**videos/**  
+- `*.mp4` — 演示录像：完整导航过程 + 3D 仪表盘实时变化  
+
+**logs/**  
+- `compile.log` — 最近一次构建输出：方便排查依赖缺失或编译错误  
+- `debug.log` — 运行时调试信息：车速、转速、油耗逐帧数值
 
 编译和运行
 编译步骤
