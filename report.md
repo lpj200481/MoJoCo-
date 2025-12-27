@@ -69,14 +69,16 @@ void getDashboardData(const mjModel* m, const mjData* d, DashboardData* out) {
 
 速度表将是一个圆形表盘，内部包含一个可旋转的指针。渲染时，先绘制一个静态的表盘背景（可通过纯色或简单纹理实现），然后根据 DashboardData.speed 的值计算出指针的旋转角度，并使用 glRotatef 进行变换后绘制指针。
 
-DrawGauge(speed_dashboard_pos, speed_ratio, speed_ticks,
+核心代码
+
+   DrawGauge(speed_dashboard_pos, speed_ratio, speed_ticks,
             static_cast<float>(speed_kmh), "km/h",
             0.0f, 0.0f, 0.0f);
 
-const float max_speed_kmh = 10.0f;
-float speed_ratio = static_cast<float>(speed_kmh) / max_speed_kmh;
-if (speed_ratio > 1.0f) speed_ratio = 1.0f;
-if (speed_ratio < 0.0f) speed_ratio = 0.0f;
+   const float max_speed_kmh = 10.0f;
+   float speed_ratio = static_cast<float>(speed_kmh) / max_speed_kmh;
+   if (speed_ratio > 1.0f) speed_ratio = 1.0f;
+   if (speed_ratio < 0.0f) speed_ratio = 0.0f;
 
 3.3.2 转速表
 
@@ -84,17 +86,19 @@ if (speed_ratio < 0.0f) speed_ratio = 0.0f;
 
 图片在imagesimage2.png
 
-DrawGauge(rpm_dashboard_pos, rpm_ratio, rpm_ticks,
+核心代码
+
+   DrawGauge(rpm_dashboard_pos, rpm_ratio, rpm_ticks,
             rpm_value, "RPM",
             0.0f, 1.0f, 0.0f);
 
-const float max_rpm = 8000.0f;
-float rpm_ratio = static_cast<float>(speed_m / max_speed_ref);
-if (rpm_ratio > 1.0f) rpm_ratio = 1.0f;
-if (rpm_ratio < 0.0f) rpm_ratio = 0.0f;
-float rpm_value = rpm_ratio * max_rpm;
+   const float max_rpm = 8000.0f;
+   float rpm_ratio = static_cast<float>(speed_m / max_speed_ref);
+   if (rpm_ratio > 1.0f) rpm_ratio = 1.0f;
+   if (rpm_ratio < 0.0f) rpm_ratio = 0.0f;
+   float rpm_value = rpm_ratio * max_rpm;
 
- double angle_x = 90.0 * 3.14159 / 180.0;
+  double angle_x = 90.0 * 3.14159 / 180.0;
   double cos_x = std::cos(angle_x);
   double sin_x = std::sin(angle_x);
   double mat_x[9] = {1, 0, 0, 0, cos_x, -sin_x, 0, sin_x, cos_x};
