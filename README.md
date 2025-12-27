@@ -28,6 +28,32 @@ MuJoCo MPC 汽车仪表盘项目
         libeigen3-dev, libopenblas-dev
         git, cmake, build-essential
 
+项目目录
+
+MoJoCo-/                         ← 仓库根
+├── .gitignore
+├── CMakeLists.txt
+├── LICENSE
+├── README.md
+├── report.md
+├── code/
+│   ├── app.cc
+│   ├── app.h
+│   ├── simple_car.cc
+│   ├── simulate.cc
+│   ├── simulate.h
+│   └── test_simple_car.cc
+├── scenes/
+│   └── car_simple.xml
+├── images/
+│   ├── 截图2025-12-27*.png
+│   └── …
+├── videos/
+│   └── *.mp4
+└── logs/
+    ├── compile.log
+    └── debug.log
+
 编译和运行
 编译步骤
 
